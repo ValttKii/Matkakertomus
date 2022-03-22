@@ -1,0 +1,565 @@
+{
+  "asiakas": [
+    {
+      "id": 5,
+      "nimi": "Collins Burgess",
+      "osoite": "Guider Avenue 67",
+      "postinumero": 81300,
+      "postitoimipaikka": "Crucible",
+      "puhelinnro": "(905) 496-3631",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 6,
+      "nimi": "Campbell Wyatt",
+      "osoite": "Stillwell Place 41",
+      "postinumero": 79800,
+      "postitoimipaikka": "Boykin",
+      "puhelinnro": "(806) 596-3954",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 7,
+      "nimi": "Alexis Barrera",
+      "osoite": "Middleton Street 69",
+      "postinumero": 79400,
+      "postitoimipaikka": "Matthews",
+      "puhelinnro": "(881) 530-2656",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 8,
+      "nimi": "Parker Ray",
+      "osoite": "Debevoise Street 7",
+      "postinumero": 98700,
+      "postitoimipaikka": "Thatcher",
+      "puhelinnro": "(818) 432-2591",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 9,
+      "nimi": "Marcie Molina",
+      "osoite": "Lott Avenue 35",
+      "postinumero": 33500,
+      "postitoimipaikka": "Ferney",
+      "puhelinnro": "(801) 593-3306",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 10,
+      "nimi": "Combs Francis",
+      "osoite": "Dekalb Avenue 59",
+      "postinumero": 85600,
+      "postitoimipaikka": "Libertytown",
+      "puhelinnro": "(958) 480-3197",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 11,
+      "nimi": "Blevins Evans",
+      "osoite": "Hoyts Lane 40",
+      "postinumero": 23000,
+      "postitoimipaikka": "Rivereno",
+      "puhelinnro": "(934) 537-3209",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 12,
+      "nimi": "Mullen Duke",
+      "osoite": "Losee Terrace 31",
+      "postinumero": 30600,
+      "postitoimipaikka": "Williams",
+      "puhelinnro": "(935) 536-2146",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 13,
+      "nimi": "Heather Williams",
+      "osoite": "Thornton Street 35",
+      "postinumero": 49300,
+      "postitoimipaikka": "Geyserville",
+      "puhelinnro": "(886) 488-2812",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 14,
+      "nimi": "Ericka Fisher",
+      "osoite": "Clarkson Avenue 40",
+      "postinumero": 45000,
+      "postitoimipaikka": "Bartley",
+      "puhelinnro": "(854) 461-3175",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 15,
+      "nimi": "Rebekah Cooley",
+      "osoite": "Colonial Court 71",
+      "postinumero": 77900,
+      "postitoimipaikka": "Cawood",
+      "puhelinnro": "(802) 512-2195",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 16,
+      "nimi": "Kline Harding",
+      "osoite": "Cozine Avenue 93",
+      "postinumero": 91800,
+      "postitoimipaikka": "Veguita",
+      "puhelinnro": "(855) 520-2087",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 17,
+      "nimi": "Mooney Washington",
+      "osoite": "Jewel Street 43",
+      "postinumero": 42700,
+      "postitoimipaikka": "Winesburg",
+      "puhelinnro": "(939) 531-3142",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 18,
+      "nimi": "Jacobson Nelson",
+      "osoite": "College Place 63",
+      "postinumero": 80900,
+      "postitoimipaikka": "Noxen",
+      "puhelinnro": "(816) 506-2435",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 19,
+      "nimi": "Meredith Shepherd",
+      "osoite": "Devoe Street 5",
+      "postinumero": 84300,
+      "postitoimipaikka": "Bendon",
+      "puhelinnro": "(921) 484-3717",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 20,
+      "nimi": "Merle Barr",
+      "osoite": "Banker Street 85",
+      "postinumero": 10500,
+      "postitoimipaikka": "Choctaw",
+      "puhelinnro": "(819) 513-2119",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 21,
+      "nimi": "Whitney Stone",
+      "osoite": "Bay Parkway 56",
+      "postinumero": 18300,
+      "postitoimipaikka": "Sterling",
+      "puhelinnro": "(842) 406-3902",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 22,
+      "nimi": "Wilma Hyde",
+      "osoite": "Utica Avenue 46",
+      "postinumero": 47100,
+      "postitoimipaikka": "Chautauqua",
+      "puhelinnro": "(921) 449-3246",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 23,
+      "nimi": "Kimberley Kidd",
+      "osoite": "Doscher Street 67",
+      "postinumero": 73400,
+      "postitoimipaikka": "Biehle",
+      "puhelinnro": "(840) 439-2931",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 24,
+      "nimi": "Rhodes Mccray",
+      "osoite": "Horace Court 77",
+      "postinumero": 75700,
+      "postitoimipaikka": "Ticonderoga",
+      "puhelinnro": "(948) 513-3050",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 25,
+      "nimi": "Shawna Smith",
+      "osoite": "Chapel Street 78",
+      "postinumero": 37700,
+      "postitoimipaikka": "Longbranch",
+      "puhelinnro": "(895) 586-3684",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 26,
+      "nimi": "Tamika Charles",
+      "osoite": "Chauncey Street 98",
+      "postinumero": 55800,
+      "postitoimipaikka": "Gardiner",
+      "puhelinnro": "(984) 512-2731",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 27,
+      "nimi": "Anne Berg",
+      "osoite": "Coyle Street 96",
+      "postinumero": 74000,
+      "postitoimipaikka": "Darlington",
+      "puhelinnro": "(952) 529-2205",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 28,
+      "nimi": "Richmond Maynard",
+      "osoite": "Harkness Avenue 74",
+      "postinumero": 67400,
+      "postitoimipaikka": "Fowlerville",
+      "puhelinnro": "(857) 536-3850",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 29,
+      "nimi": "Elaine Rice",
+      "osoite": "Bayview Avenue 21",
+      "postinumero": 58000,
+      "postitoimipaikka": "Elbert",
+      "puhelinnro": "(893) 582-3308",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 30,
+      "nimi": "Taylor Matthews",
+      "osoite": "Harway Avenue 95",
+      "postinumero": 96200,
+      "postitoimipaikka": "Elliston",
+      "puhelinnro": "(963) 467-3362",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 31,
+      "nimi": "Pratt Luna",
+      "osoite": "Sumpter Street 97",
+      "postinumero": 96800,
+      "postitoimipaikka": "Freelandville",
+      "puhelinnro": "(843) 565-3419",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 32,
+      "nimi": "Martha Hodges",
+      "osoite": "Ridgecrest Terrace 55",
+      "postinumero": 15300,
+      "postitoimipaikka": "Driftwood",
+      "puhelinnro": "(863) 502-2394",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 33,
+      "nimi": "Crystal Harper",
+      "osoite": "Eastern Parkway 22",
+      "postinumero": 75100,
+      "postitoimipaikka": "Datil",
+      "puhelinnro": "(932) 485-2195",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 34,
+      "nimi": "Frost Britt",
+      "osoite": "Orient Avenue 98",
+      "postinumero": 52500,
+      "postitoimipaikka": "Frizzleburg",
+      "puhelinnro": "(948) 406-3228",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 35,
+      "nimi": "Mcgowan Campos",
+      "osoite": "Ford Street 44",
+      "postinumero": 22700,
+      "postitoimipaikka": "Rose",
+      "puhelinnro": "(964) 424-2555",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 36,
+      "nimi": "Hickman Hogan",
+      "osoite": "Emerson Place 94",
+      "postinumero": 22000,
+      "postitoimipaikka": "Wawona",
+      "puhelinnro": "(954) 409-3682",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 37,
+      "nimi": "Bean Sanchez",
+      "osoite": "Grand Avenue 98",
+      "postinumero": 99200,
+      "postitoimipaikka": "Lisco",
+      "puhelinnro": "(822) 453-3457",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 38,
+      "nimi": "Henson Daugherty",
+      "osoite": "Woodrow Court 11",
+      "postinumero": 52400,
+      "postitoimipaikka": "Sheatown",
+      "puhelinnro": "(859) 412-3648",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 39,
+      "nimi": "Manning Sampson",
+      "osoite": "Poplar Street 47",
+      "postinumero": 32100,
+      "postitoimipaikka": "Staples",
+      "puhelinnro": "(981) 440-3578",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 40,
+      "nimi": "Reed Higgins",
+      "osoite": "Chester Street 97",
+      "postinumero": 54200,
+      "postitoimipaikka": "Lithium",
+      "puhelinnro": "(832) 473-3468",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 41,
+      "nimi": "Lancaster Moreno",
+      "osoite": "Nelson Street 64",
+      "postinumero": 96100,
+      "postitoimipaikka": "Lacomb",
+      "puhelinnro": "(807) 468-2236",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 42,
+      "nimi": "Maddox Huff",
+      "osoite": "Wyckoff Street 46",
+      "postinumero": 67700,
+      "postitoimipaikka": "Leland",
+      "puhelinnro": "(940) 440-3797",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 43,
+      "nimi": "Rena Wolfe",
+      "osoite": "Harrison Place 9",
+      "postinumero": 73100,
+      "postitoimipaikka": "Charco",
+      "puhelinnro": "(827) 404-2678",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 44,
+      "nimi": "Cooley Vega",
+      "osoite": "Gunnison Court 39",
+      "postinumero": 86600,
+      "postitoimipaikka": "Springdale",
+      "puhelinnro": "(836) 493-3707",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 45,
+      "nimi": "Conley Good",
+      "osoite": "Lafayette Avenue 33",
+      "postinumero": 31600,
+      "postitoimipaikka": "Laurelton",
+      "puhelinnro": "(882) 480-2478",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 46,
+      "nimi": "Sykes Mack",
+      "osoite": "Tennis Court 72",
+      "postinumero": 50700,
+      "postitoimipaikka": "Naomi",
+      "puhelinnro": "(852) 498-2386",
+      "tyyppi_id": 3,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 47,
+      "nimi": "Rosario Alston",
+      "osoite": "Hamilton Walk 65",
+      "postinumero": 88500,
+      "postitoimipaikka": "Corriganville",
+      "puhelinnro": "(848) 559-2196",
+      "tyyppi_id": 2,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    },
+    {
+      "id": 48,
+      "nimi": "Beverley Adams",
+      "osoite": "Grimes Road 22",
+      "postinumero": 76200,
+      "postitoimipaikka": "Harrodsburg",
+      "puhelinnro": "(873) 578-3969",
+      "tyyppi_id": 1,
+      "tyyppi_selite": "1=henkilöasiakas, 2=yritysasiakas, 3=entinen asiakas"
+    }
+  ],
+  "asiakastyyppi": [
+    {
+      "id": 1,
+      "lyhenne": "HEN",
+      "selite": "henkilöasiakas"
+    },
+    {
+      "id": 2,
+      "lyhenne": "YRI",
+      "selite": "yritysasiakas"
+    },
+    {
+      "id": 3,
+      "lyhenne": "ENT",
+      "selite": "entinen asiakas"
+    }
+  ],
+  "matkakohde": [
+    {
+      "kohdenimi": "Huvipuisto",
+      "maa": "Suomi",
+      "paikkakunta": "Helsinki",
+      "kuvaus": "Hurja paikka",
+      "id": 56
+    },
+    {
+      "maa": "sdf",
+      "paikkakunta": "sdf",
+      "kuvaus": "sdf",
+      "id": 60
+    },
+    {
+      "maa": "sdf",
+      "paikkakunta": "sdf",
+      "kuvaus": "sdf",
+      "id": 61
+    },
+    {
+      "kohdenimi": "f",
+      "maa": "f",
+      "paikkakunta": "ff",
+      "kuvaus": "ff",
+      "id": 62
+    },
+    {
+      "kohdenimi": "f",
+      "maa": "f",
+      "paikkakunta": "ff",
+      "kuvaus": "ff",
+      "id": 63
+    },
+    {
+      "kohdenimi": "f",
+      "maa": "f",
+      "paikkakunta": "ff",
+      "kuvaus": "ff",
+      "id": 64
+    },
+    {
+      "kohdenimi": "asdfdsaf",
+      "maa": "f",
+      "paikkakunta": "ff",
+      "kuvaus": "ff",
+      "id": 65
+    },
+    {
+      "maa": "f",
+      "paikkakunta": "ff",
+      "kuvaus": "ff",
+      "id": 66
+    },
+    {
+      "kohdenimi": "sdf",
+      "maa": "f",
+      "paikkakunta": "ff",
+      "kuvaus": "ff",
+      "id": 67
+    },
+    {
+      "kohdenimi": "sdf",
+      "maa": "f",
+      "paikkakunta": "ff",
+      "kuvaus": "ff",
+      "id": 68
+    },
+    {
+      "kohdenimi": "sdf",
+      "maa": "f",
+      "paikkakunta": "ff",
+      "kuvaus": "ff",
+      "id": 69
+    },
+    {
+      "kohdenimi": "sdf",
+      "maa": "f",
+      "paikkakunta": "ff",
+      "kuvaus": "ff",
+      "id": 70
+    },
+    {
+      "kohdenimi": "sdf",
+      "maa": "f",
+      "paikkakunta": "ff",
+      "kuvaus": "ff",
+      "id": 71
+    },
+    {
+      "kohdenimi": "sdf",
+      "maa": "f",
+      "paikkakunta": "ff",
+      "kuvaus": "ff",
+      "id": 72
+    },
+    {
+      "kohdenimi": "??",
+      "maa": "Kreikka",
+      "paikkakunta": "eidataa",
+      "kuvaus": "Kuuma",
+      "id": 73
+    }
+  ]
+}
