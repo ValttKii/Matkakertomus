@@ -5,7 +5,7 @@ import { Navbar, Header } from '../common';
 
 export const Jasenet = () => {
 
-    return(<p>MOI</p>
+    return(<p>MOI WATAAA</p>
     )
 }
 export default Jasenet;
