@@ -561,5 +561,53 @@
       "kuvaus": "Kuuma",
       "id": 73
     }
+  ],
+
+  "jäsenet": [
+    {
+      "etunimi": "Jere",
+      "sukunimi": "Heinonen",
+      "nimimerkki": "Heiska",
+      "paikkakunta": "Kuopio",
+      "idjäsen": 56,
+      "esittely": "Oon Jere ja oon gona ukko.",
+      "kuva": "",
+      "email": "Jere.heinonen@gmail.com",
+      "salasana": "naapurinpoeka55"
+    },
+    {
+      "etunimi": "Jouni",
+      "sukunimi": "Korhonen",
+      "nimimerkki": "Jone",
+      "paikkakunta": "Kuopio",
+      "idjäsen": 57,
+      "esittely": "Oon Jouni ja asun niiralas, gang gang gang.",
+      "kuva": "",
+      "email": "Jouni.korhonen@gmail.com",
+      "salasana": "naapurinpoeka772"
+    },
+    {
+      "etunimi": "Valtteri",
+      "sukunimi": "Kiili",
+      "nimimerkki": "Vk",
+      "paikkakunta": "Kuopio",
+      "idjäsen": 58,
+      "esittely": "Moro, oon Valtteri.",
+      "kuva": "",
+      "email": "Valtteri.kiili@gmail.com",
+      "salasana": "naapurinpoeka666"
+    },
+    {
+      "etunimi": "Olli",
+      "sukunimi": "Launonen",
+      "nimimerkki": "Pitkaveto",
+      "paikkakunta": "Kuopio",
+      "idjäsen": 59,
+      "esittely": "Oon Olli melkee 30wee Sawosta.",
+      "kuva": "",
+      "email": "Olli.launo@gmail.com",
+      "salasana": "naapurinpoeka1"
+      
+    }
   ]
 }
