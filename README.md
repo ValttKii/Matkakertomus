@@ -3,8 +3,8 @@ Ohjelmistotuotanto 2 projekti
 
 
 # Getting Started
-1. cd server, npm install, npm install react-router-dom@6 and npm run dev
-2. cd client, npm install and npm run start
+1. cd server, npm install and npm run dev
+2. cd client, npm install, npm install react-router-dom@6 and npm run start
 
 
 # Build and Test
