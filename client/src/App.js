@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import  { Header } from './components/common'
-import  {Asiakas}   from './components'
+import  {Asiakas, Etusivu}   from './components'
 
 import './App.css';
 
@@ -31,7 +31,7 @@ function App() {
       
       <Routes>
         <Route path="/matkakohde" element={<Asiakas/>}/>
-
+        <Route path="/etusivu" element={<Etusivu/>}/>
         
       </Routes>
       </Router>
