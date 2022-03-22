@@ -1,3 +1,3 @@
-import Jasenet from "./Jäsenet";
+import Jasenet from "./Jasenet";
 
 export default Jasenet;
