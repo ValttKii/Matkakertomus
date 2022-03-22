@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { Navbar, Header } from '../common';
 
 
-export const Jäsenet = () => {
+export const Jasenet = () => {
 
     return(<p>MOI</p>
     )
 }
-export default Jäsenet;
+export default Jasenet;

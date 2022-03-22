@@ -1,6 +1,6 @@
 import Asiakas from "./matkakohde";
 import Etusivu from "./etusivu";
-import Jäsenet from "./jäsenet";
+import Jasenet from "./jasenet";
 export {
-    Asiakas, Etusivu, Jäsenet
+    Asiakas, Etusivu, Jasenet
 }
