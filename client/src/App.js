@@ -23,7 +23,7 @@ function App() {
     
   },[])
 
-asd
+
   return (
     <div className="App">
       <Router>
