@@ -1,6 +1,7 @@
 .navbar {
     display: flex;
     flex-direction: row;
+    padding: 10px;
   }
   
   .navbar-item {
@@ -12,4 +13,5 @@
     text-decoration: inherit;
     text-transform: uppercase;
     outline: none;
+    
   }
