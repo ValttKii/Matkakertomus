@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navbar, Header } from '../common';
-
+import Button from '@mui/material/Button'
 
 
 import { useState, useEffect } from "react";
@@ -161,9 +161,9 @@ export const Asiakas = () => {
           />
         </label>
         
-        <button onClick={() => haeClicked()}>
+        <Button variant="contained" onClick={() => haeClicked()}>
           Hae
-        </button>
+        </Button>
         <button onClick={() => setshowEditForm(true)}>
           Lisää uusi
         </button>
