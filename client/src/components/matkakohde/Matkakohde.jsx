@@ -1,7 +1,14 @@
 import React from 'react'
 import { Navbar, Header } from '../common';
+import './Matkakohde.css'
 import Button from '@mui/material/Button'
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 import { useState, useEffect } from "react";
 
@@ -266,23 +273,23 @@ const Kohteet = (props) => {
     const { data , onDelete, onEdit} = props;
 
     const rows = data.map((t) => (
-        <tr key={t.id}>
-            <td>{t.id}</td>
-            <td>{t.kohdenimi}</td>
-            <td>{t.maa}</td>
-            <td>{t.paikkakunta}</td>
-            <td>{t.kuvaus}</td>
-            <td>
+        <TableRow key={t.id}>
+            <TableCell>{t.id}</TableCell>
+            <TableCell>{t.kohdenimi}</TableCell>
+            <TableCell>{t.maa}</TableCell>
+            <TableCell>{t.paikkakunta}</TableCell>
+            <TableCell>{t.kuvaus}</TableCell>
+            <TableCell>
             <button onClick={() => deleteClicked(t)}>
           Poista {t.id}
         </button>
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <button  onClick={() => onEdit(t)}>
           Muokkaa asiakasta {t.id}
         </button>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
     ))
 
     const deleteClicked = (a) => {
@@ -294,21 +301,21 @@ const Kohteet = (props) => {
       };
 
     return (
-        <div>
+        <TableContainer className="TbCont" component={Paper}>
 
-            <table>
-                <thead>
-                    <tr>
-                        <td>Id</td>
-                        <td>Kohde</td>
-                        <td>Maa</td>
-                        <td>Paikkakunta</td>
-                        <td>Kuvaus</td>
-                    </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-            </table>
-        </div>
+            <Table sx={{ }} size="small"  aria-label="a dense table">
+                <TableHead>
+                    <TableRow  >
+                        <TableCell>Id</TableCell>
+                        <TableCell>Kohde</TableCell>
+                        <TableCell>Maa</TableCell>
+                        <TableCell>Paikkakunta</TableCell>
+                        <TableCell>Kuvaus</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>{rows}</TableBody>
+            </Table>
+        </TableContainer>
     );
 }
 export default Asiakas;

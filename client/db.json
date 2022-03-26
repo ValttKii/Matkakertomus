@@ -560,9 +560,15 @@
       "paikkakunta": "eidataa",
       "kuvaus": "Kuuma",
       "id": 73
+    },
+    {
+      "kohdenimi": "1",
+      "maa": "2",
+      "paikkakunta": "3",
+      "kuvaus": "4",
+      "id": 74
     }
   ],
-
   "jäsenet": [
     {
       "etunimi": "Jere",
@@ -607,7 +613,6 @@
       "kuva": "",
       "email": "Olli.launo@gmail.com",
       "salasana": "naapurinpoeka1"
-      
     }
   ]
 }
