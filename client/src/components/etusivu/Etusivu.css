@@ -1,0 +1,21 @@
+.matka {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.matka_kuva {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.matka_otsikko {
+    position: absolute;
+    bottom: 15%;
+    right: 10%;
+    color: white;
+    font-size: 4rem;
+    padding: 15px;
+    font-family: 'Indie Flower', cursive;
+}
