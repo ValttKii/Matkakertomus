@@ -171,9 +171,9 @@ export const Asiakas = () => {
         <Button variant="contained" onClick={() => haeClicked()}>
           Hae
         </Button>
-        <button onClick={() => setshowEditForm(true)}>
+        <Button onClick={() => setshowEditForm(true)}>
           Lisää uusi
-        </button>
+        </Button>
 
         <h4>KOHTEET</h4>
         {renderTable()}
@@ -248,22 +248,22 @@ const KohdeForm = (props) => {
           
         </label>
         {matkakohde ? (
-          <button onClick={() => tallennaClicked()}>
+          <Button onClick={() => tallennaClicked()}>
             Tallenna muutos
-          </button>
+          </Button>
         ) : (
-          <button onClick={() => tallennaClicked()}>
+          <Button onClick={() => tallennaClicked()}>
             Tallenna
-          </button>
+          </Button>
         )}
         {matkakohde ? (
-          <button  onClick={() => onCancel()}>
+          <Button  onClick={() => onCancel()}>
             Peruuta Muutos
-          </button>
+          </Button>
         ) : (
-          <button  onClick={() => onCancel()}>
+          <Button  onClick={() => onCancel()}>
             Peruuta
-          </button>
+          </Button>
         )}
       </div>
     );
@@ -280,14 +280,14 @@ const Kohteet = (props) => {
             <TableCell>{t.paikkakunta}</TableCell>
             <TableCell>{t.kuvaus}</TableCell>
             <TableCell>
-            <button onClick={() => deleteClicked(t)}>
+            <Button onClick={() => deleteClicked(t)}>
           Poista {t.id}
-        </button>
+        </Button>
       </TableCell>
       <TableCell>
-        <button  onClick={() => onEdit(t)}>
+        <Button  onClick={() => onEdit(t)}>
           Muokkaa asiakasta {t.id}
-        </button>
+        </Button>
       </TableCell>
     </TableRow>
     ))
@@ -301,7 +301,7 @@ const Kohteet = (props) => {
       };
 
     return (
-        <TableContainer className="TbCont" component={Paper}>
+        <TableContainer sx={{width: "80%", margin: "auto"}} component={Paper}>
 
             <Table sx={{ }} size="small"  aria-label="a dense table">
                 <TableHead>
