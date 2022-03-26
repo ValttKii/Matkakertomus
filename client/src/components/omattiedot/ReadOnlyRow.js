@@ -1,4 +1,5 @@
 import React from "react";
+import Button from '@mui/material/Button';
 
 const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
   return (
@@ -8,18 +9,19 @@ const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
       <td>{contact.phoneNumber}</td>
       <td>{contact.email}</td>
       <td>
-        <button
-          type="button"
+        <Button
+          variant="contained"
           onClick={(event) => handleEditClick(event, contact)}
         >
           Muokkaa
-        </button>
-        <button type="button" onClick={() => handleDeleteClick(contact.id)}>
+        </Button>
+        <Button variant="contained" onClick={() => handleDeleteClick(contact.id)}>
           Poista
-        </button>
+        </Button>
       </td>
     </tr>
   );
 };
 
 export default ReadOnlyRow;
+
