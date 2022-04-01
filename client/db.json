@@ -567,6 +567,20 @@
       "paikkakunta": "3",
       "kuvaus": "4",
       "id": 74
+    },
+    {
+      "kohdenimi": "Testi1",
+      "maa": "",
+      "paikkakunta": "",
+      "kuvaus": "",
+      "id": 75
+    },
+    {
+      "kohdenimi": "wataa",
+      "maa": "wataaa",
+      "paikkakunta": "wataaaa",
+      "kuvaus": "wataaaaa",
+      "id": 76
     }
   ],
   "jäsenet": [
