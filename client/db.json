@@ -569,13 +569,13 @@
       "id": 74
     }
   ],
-  "jäsenet": [
+  "jasenet": [
     {
       "etunimi": "Jere",
       "sukunimi": "Heinonen",
       "nimimerkki": "Heiska",
-      "paikkakunta": "Kuopio",
-      "idjäsen": 56,
+      "paikkakunta": "Ylivieska",
+      "id": 56,
       "esittely": "Oon Jere ja oon gona ukko.",
       "kuva": "",
       "email": "Jere.heinonen@gmail.com",
@@ -586,7 +586,7 @@
       "sukunimi": "Korhonen",
       "nimimerkki": "Jone",
       "paikkakunta": "Kuopio",
-      "idjäsen": 57,
+      "id": 57,
       "esittely": "Oon Jouni ja asun niiralas, gang gang gang.",
       "kuva": "",
       "email": "Jouni.korhonen@gmail.com",
@@ -596,8 +596,8 @@
       "etunimi": "Valtteri",
       "sukunimi": "Kiili",
       "nimimerkki": "Vk",
-      "paikkakunta": "Kuopio",
-      "idjäsen": 58,
+      "paikkakunta": "Mouhijärvi",
+      "id": 58,
       "esittely": "Moro, oon Valtteri.",
       "kuva": "",
       "email": "Valtteri.kiili@gmail.com",
@@ -607,8 +607,8 @@
       "etunimi": "Olli",
       "sukunimi": "Launonen",
       "nimimerkki": "Pitkaveto",
-      "paikkakunta": "Kuopio",
-      "idjäsen": 59,
+      "paikkakunta": "Nurmes",
+      "id": 59,
       "esittely": "Oon Olli melkee 30wee Sawosta.",
       "kuva": "",
       "email": "Olli.launo@gmail.com",
