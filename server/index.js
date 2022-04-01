@@ -7,9 +7,12 @@ app.use(cors())
 app.get('/', (req, res)=>{
     res.send('Hello world!')
 })
-app.get('/json', (req, res)=>{
+app.get('/matkakohde', (req, res)=>{
     const foo = {nimi:'yes'}
     res.json(foo)
+})
+app.post('/matkakohde', (req, res)=>{
+    
 })
 
 app.listen(port, ()=>{
