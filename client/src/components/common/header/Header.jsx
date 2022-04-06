@@ -9,7 +9,7 @@ const Header = () => {
         <section className='header'>
             <section className='header-top'>
                 <section className='header-top-logo'>
-                    <a href="/" className='header-logo' >RS</a>
+                    <a href="/etusivu" className='header-logo' >RS</a>
                 </section>
                 <section className='header-top__navbar'>
                     <section className='header-top__navigation'>
