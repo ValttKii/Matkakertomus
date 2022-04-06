@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useState} from "react";
 
 import { Navbar, Header } from '../common';
 
@@ -30,6 +31,9 @@ function Copyright(props) {
 const theme = createTheme();
 
 export function Kirjaudu() {
+
+  const [kirjaudu, setKirjaudu] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -78,6 +82,7 @@ export function Kirjaudu() {
               autoComplete="current-password"
             />
             <Button
+              onClick={()=> setKirjaudu(true)}
               type="submit"
               fullWidth
               variant="contained"
@@ -93,7 +98,7 @@ export function Kirjaudu() {
               </Grid> */}
               <Grid item>
                 <Link href="/rekisteroidy" variant="body2">
-                  {"Eikö sinulla ole käyttäjää? Rekisteröidy?"}
+                  {"Eikö sinulla ole käyttäjää? Rekisteröidy."}
                 </Link>
               </Grid>
             </Grid>
