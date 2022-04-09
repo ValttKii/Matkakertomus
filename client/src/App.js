@@ -14,14 +14,7 @@ import { Link, NavLink, Routes, Route, BrowserRouter as Router, useNavigate, use
 
 function App() {
 
-  const [data,setData] = useState({})
-
-  useEffect(()=>{
-    axios.get("http://localhost:8080/json").then((res)=>{
-      setData(res.data)
-    })
-    
-  },[])
+  
 
 
   return (
@@ -40,9 +33,7 @@ function App() {
       </Routes>
       </Router>
       
-        <p>
-          {JSON.stringify(data)}
-        </p>
+        
     </div>
   );
 }

@@ -2,16 +2,13 @@ import React from 'react'
 import { Navbar, Header } from '../common';
 import './Matkakohde.css'
 import Button from '@mui/material/Button'
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Input from '@mui/material/Input';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 
 import { useState, useEffect } from "react";
 
@@ -29,11 +26,8 @@ const doSearchQuery = (maa) => {
 
 export const Asiakas = () => {
 
-  const [kohdenimi, setKohdeNimi] = useState("");
-  const [osoite, setOsoite] = useState("");
+
   const [maa, setMaa] = useState("");
-  const [paikkakunta, setPaikkakunta] = useState("");
-  const [kuvaus, setKuvaus] = useState("");
   const [query, setQuery] = useState("");
   const [kohteet, setKohteet] = useState([]);
   const [kohdedeleted, setKohdeDeleted] = useState(null);
@@ -42,6 +36,15 @@ export const Asiakas = () => {
   const [modifiedKohde, setModifiedKohde] = useState(null);
   const [showEditForm, setshowEditForm] = useState(false);
   const [muutettavaid, setMuutettavaId] = useState(-1);
+
+  useEffect(() => {
+    const fetchKohde = async () => {
+      const response = await fetch("http://localhost:3004/matkakohde");
+      const data = await response.json();
+      setKohteet(data);
+    }
+    fetchKohde();
+  }, [])
 
   useEffect(() => {
     const fetchKohde = async () => {
@@ -65,9 +68,10 @@ export const Asiakas = () => {
   }, [muutettavaid]);
 
   useEffect(() => {
+    console.log("kohde del", kohdedeleted)
     const deleteKohde = async () => {
       const r = await fetch(
-        "http://localhost:3004/matkakohde/" + kohdedeleted.id,
+        "http://localhost:3004/matkakohde/" + kohdedeleted.idmatkakohde,
         {
           method: "DELETE",
         }
@@ -75,7 +79,7 @@ export const Asiakas = () => {
       console.log("DELETE:", r);
       setQuery(doSearchQuery(maa));
     };
-    if (kohdedeleted != null) deleteKohde();
+    if (kohdedeleted) deleteKohde();
   }, [kohdedeleted]);
 
   useEffect(() => {
@@ -89,7 +93,9 @@ export const Asiakas = () => {
           kohdenimi: kohdeinserted.kohdenimi,
           maa: kohdeinserted.maa,
           paikkakunta: kohdeinserted.paikkakunta,
-          kuvaus: kohdeinserted.kuvaus,
+          kuvausteksti: kohdeinserted.kuvausteksti,
+          kuva: kohdeinserted.kuva,
+
         }),
       });
       console.log("INSERT:", r);
@@ -109,10 +115,11 @@ export const Asiakas = () => {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
-            kohdenimi: modifiedKohde.nimi,
+            kohdenimi: modifiedKohde.kohdenimi,
             maa: modifiedKohde.maa,
             paikkakunta: modifiedKohde.paikkakunta,
-            kuvaus: modifiedKohde.kuvaus,
+            kuvausteksti: modifiedKohde.kuvausteksti,
+            kuva: modifiedKohde.kuva
           }),
         }
       );
@@ -134,7 +141,8 @@ export const Asiakas = () => {
   };
 
   const onEdit = (matkakohde) => {
-    setMuutettavaId(matkakohde.id);
+    console.log("Setting matkakohde", matkakohde)
+    setMuutettavaId(matkakohde.idmatkakohde);
     setshowEditForm(true);
   };
 
@@ -194,7 +202,10 @@ export const Asiakas = () => {
           </Grid>
 
           <Grid item>
-            <Button variant="outlined" onClick={() => setshowEditForm(true)}>
+            <Button variant="outlined" onClick={() => {
+              setKohdeModified(undefined)
+              setshowEditForm(true)
+            }}>
               Lisää uusi
             </Button>
           </Grid>
@@ -213,19 +224,24 @@ const KohdeForm = (props) => {
   const [kohdenimi, setKohdeNimi] = useState("");
   const [maa, setMaa] = useState("");
   const [paikkakunta, setPaikkakunta] = useState("");
-  const [kuvaus, setKuvaus] = useState("");
+  const [kuvausteksti, setKuvausteksti] = useState("");
+  const [kuva, setKuva] = useState("");
 
 
   const tallennaClicked = () => {
-    onSave({ id: -1, maa, kohdenimi, paikkakunta, kuvaus });
+    let id = -1;
+    if (matkakohde) id = matkakohde.idmatkakohde;
+    onSave({ id: id, maa, kohdenimi, paikkakunta, kuvausteksti, kuva });
   };
 
   useEffect(() => {
     if (matkakohde) {
+      console.log("ifmatkakohde", matkakohde)
       setKohdeNimi(matkakohde.kohdenimi);
       setMaa(matkakohde.maa);
       setPaikkakunta(matkakohde.paikkakunta);
-      setKuvaus(matkakohde.kuvaus);
+      setKuvausteksti(matkakohde.kuvausteksti);
+      setKuva(matkakohde.kuva)
     }
   }, [matkakohde]);
 
@@ -277,12 +293,24 @@ const KohdeForm = (props) => {
       </Grid>
       <Grid item>
         <TextField
-          label="Kuvaus"
+          label="Kuvausteksti"
           id="filled-size-normal"
           defaultValue=""
           variant="filled"
-          value={kuvaus}
-          onChange={(e) => setKuvaus(e.target.value)}
+          value={kuvausteksti}
+          onChange={(e) => setKuvausteksti(e.target.value)}
+        />
+
+      </Grid>
+      <Grid item>
+        <TextField
+          id="filled-multiline-flexible"
+          label="Kuvan url"
+          multiline
+          maxRows={4}
+          variant="filled"
+          value={kuva}
+          onChange={(e) => setKuva(e.target.value)}
         />
       </Grid>
 
@@ -319,24 +347,48 @@ const Kohteet = (props) => {
   console.log("kohteet: ", props)
   const { data, onDelete, onEdit } = props;
 
+  /* <TableCell>{t.id}</TableCell>
+    <TableCell>{t.kohdenimi}</TableCell>
+    <TableCell>{t.maa}</TableCell>
+    <TableCell>{t.paikkakunta}</TableCell>
+    <TableCell>{t.kuvausteksti}</TableCell>
+    <TableCell>
+      <Button onClick={() => deleteClicked(t)}>
+        Poista {t.id}
+      </Button>
+    </TableCell>
+    <TableCell>
+      <Button onClick={() => onEdit(t)}>
+        Muokkaa kohdetta {t.id}
+      </Button>
+    </TableCell>  */
   const rows = data.map((t) => (
-    <TableRow key={t.id}>
-      <TableCell>{t.id}</TableCell>
-      <TableCell>{t.kohdenimi}</TableCell>
-      <TableCell>{t.maa}</TableCell>
-      <TableCell>{t.paikkakunta}</TableCell>
-      <TableCell>{t.kuvaus}</TableCell>
-      <TableCell>
-        <Button onClick={() => deleteClicked(t)}>
-          Poista {t.id}
-        </Button>
-      </TableCell>
-      <TableCell>
-        <Button onClick={() => onEdit(t)}>
-          Muokkaa kohdetta {t.id}
-        </Button>
-      </TableCell>
-    </TableRow>
+    <Grid item xs={3}>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardMedia
+          component="img"
+          alt="Kuva"
+          height="140"
+          image={t.kuva}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {t.kohdenimi} - {t.maa} - {t.paikkakunta}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {t.kuvausteksti}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small" onClick={() => deleteClicked(t)}>
+            Poista {t.id}
+          </Button>
+          <Button size="small" onClick={() => onEdit(t)}>
+            Muokkaa kohdetta {t.id}
+          </Button>
+        </CardActions>
+      </Card >
+    </Grid>
   ))
 
   const deleteClicked = (a) => {
@@ -348,21 +400,9 @@ const Kohteet = (props) => {
   };
 
   return (
-    <TableContainer sx={{ width: "80%", margin: "auto" }} component={Paper}>
-
-      <Table sx={{}} size="small" aria-label="a dense table">
-        <TableHead>
-          <TableRow  >
-            <TableCell>Id</TableCell>
-            <TableCell>Kohde</TableCell>
-            <TableCell>Maa</TableCell>
-            <TableCell>Paikkakunta</TableCell>
-            <TableCell>Kuvaus</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{rows}</TableBody>
-      </Table>
-    </TableContainer>
+    <Grid container spacing={2} sx={{ width: "80%", margin: "auto" }}>
+      {rows}
+    </Grid>
   );
 }
 export default Asiakas;
