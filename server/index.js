@@ -18,7 +18,7 @@ app.use(cors);
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',      // ÄLÄ KOSKAAN käytä root:n tunnusta tuotannossa
-    password: 'root',
+    password: '',
     database: 'mydb',
     dateStrings: true
 });
