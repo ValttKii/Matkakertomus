@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import  { Header } from './components/common'
-import  {Asiakas, Etusivu, Jasenet, Omattiedot, Rekisteroidy, Kirjaudu}   from './components'
+import  {Matkakohde, Etusivu, Jasenet, Omattiedot, Rekisteroidy, Kirjaudu, Porukanmatkat}   from './components'
 
 import './App.css';
 
@@ -14,26 +14,23 @@ import { Link, NavLink, Routes, Route, BrowserRouter as Router, useNavigate, use
 
 function App() {
 
-  
-
-
   return (
     <div className="App">
       <Router>
       <Header/>
       
       <Routes>
-        <Route path="/matkakohde" element={<Asiakas/>}/>
+        <Route path="/matkakohde" element={<Matkakohde/>}/>
         <Route path="/etusivu" element={<Etusivu/>}/>
         <Route path="/jasenet" element={<Jasenet/>}/>
         <Route path="/omattiedot" element={<Omattiedot/>}/>
         <Route path="/rekisteroidy" element={<Rekisteroidy/>}/>
         <Route path="/kirjaudu" element={<Kirjaudu/>}/>
+        <Route path="/porukanmatkat" element={<Porukanmatkat/>}/>
 
       </Routes>
       </Router>
       
-        
     </div>
   );
 }

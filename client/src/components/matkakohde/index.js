@@ -1,3 +1,3 @@
-import Asiakas from "./Matkakohde";
+import Matkakohde from "./Matkakohde";
 
-export default Asiakas;
+export default Matkakohde;

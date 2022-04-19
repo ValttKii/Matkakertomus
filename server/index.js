@@ -19,7 +19,7 @@ var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',      // ÄLÄ KOSKAAN käytä root:n tunnusta tuotannossa
     password: 'root',
-    database: 'mydb',
+    database: 'mykanta',
     dateStrings: true
 });
 
@@ -110,7 +110,7 @@ app.put('/matkakohde/:id', (req, res) => {
         if (error) {
             console.log("Virhe", error);
             res.statusCode = 400;
-            return res.json({ status: "NOT OK", message: "Pakollisia tietoja puuttuu:" + kentat });
+            
         }
         else {
             console.log("R:", result);
@@ -146,6 +146,44 @@ app.delete('/matkakohde/:id', (req, res) => {
         }
     })
 
+})
+app.get('/tarina', (req, res) => {
+
+   
+
+    let query = "SELECT * from tarina INNER JOIN matkakohde ON tarina.idmatkakohde = matkakohde.idmatkakohde"
+
+    connection.query(query, function (error, result, fields) {
+        console.log("done")
+        if (error) {
+            console.log("Virhe", error);
+            res.json({ status: "NOT OK", msg: "Tekninen virhe!" });
+        }
+        else {
+            res.statusCode = 200;
+            res.json(result);
+        }
+    })
+
+})
+
+app.get('/tarina/:id/kuva', (req, res) => {
+
+   const id = req.params.id;
+
+    let query = "SELECT * from kuva where idtarina = " + id;
+
+    connection.query(query, function (error, result, fields) {
+        console.log("done")
+        if (error) {
+            console.log("Virhe", error);
+            res.json({ status: "NOT OK", msg: "Tekninen virhe!" });
+        }
+        else {
+            res.statusCode = 200;
+            res.json(result);
+        }
+    })
 })
 
 app.listen(port, () => {

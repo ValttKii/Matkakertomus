@@ -24,7 +24,7 @@ const doSearchQuery = (maa) => {
   return r.join("&");
 };
 
-export const Asiakas = () => {
+export const Matkakohde = () => {
 
 
   const [maa, setMaa] = useState("");
@@ -56,15 +56,14 @@ export const Asiakas = () => {
   }, [query])
 
   useEffect(() => {
-    const fetchAsiakasById = async () => {
+    const fetchMatkakohdeById = async () => {
       const r = await fetch("http://localhost:3004/matkakohde/" + muutettavaid);
       const data = await r.json();
-      // Huomaa että tämä palvelu palauttaa VAIN yhden object:n
-      // jos haet niin että url on muotoa http://localhost:3004/asiakas?id=200 -> palautuu TAULUKKO -> ota taulukon 1. alkio
+    
       setKohdeModified(data);
       setshowEditForm(true);
     };
-    if (muutettavaid > 0) fetchAsiakasById();
+    if (muutettavaid > 0) fetchMatkakohdeById();
   }, [muutettavaid]);
 
   useEffect(() => {
@@ -245,7 +244,6 @@ const KohdeForm = (props) => {
     }
   }, [matkakohde]);
 
-  //console.log("Asiakasform:", asiakas);
 
   return (
     <Grid container spacing={5}
@@ -392,8 +390,7 @@ const Kohteet = (props) => {
   ))
 
   const deleteClicked = (a) => {
-    //Kommentoitu tehtävän 23 testitarkoistua varten
-    //Muuta tehtävää ja tehtävänantoa niin että table häviää ja tilalle tulee varmistus
+    
     const r = window.confirm(`Haluatko varmasti poistaa kohteen ${a.kohdenimi} maasta ${a.maa}?`);
     console.log("ärrä: ")
     if (r) onDelete(a);
@@ -405,4 +402,4 @@ const Kohteet = (props) => {
     </Grid>
   );
 }
-export default Asiakas;
+export default Matkakohde;

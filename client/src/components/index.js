@@ -1,9 +1,10 @@
-import Asiakas from "./matkakohde";
+import Matkakohde from "./matkakohde";
 import Etusivu from "./etusivu";
 import Jasenet from "./jasenet";
 import Omattiedot from "./omattiedot";
 import Rekisteroidy from "./rekisteroidy";
 import Kirjaudu from "./kirjaudu/kirjaudu";
+import Porukanmatkat from "./porukanmatkat";
 export {
-    Asiakas, Etusivu, Jasenet, Omattiedot, Rekisteroidy, Kirjaudu
+    Matkakohde, Etusivu, Jasenet, Omattiedot, Rekisteroidy, Kirjaudu, Porukanmatkat
 }
