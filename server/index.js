@@ -186,6 +186,28 @@ app.get('/tarina/:id/kuva', (req, res) => {
     })
 })
 
+app.get('/jasenet', (req, res) => {
+
+    let etunimi = req.query.etunimi;
+
+    let query = "SELECT * from matkaaja WHERE 1=1 "
+
+    if (etunimi) query = query + " AND etunimi LIKE '" + etunimi + "%" + "'";
+
+    connection.query(query, function (error, result, fields) {
+        console.log("done")
+        if (error) {
+            console.log("Virhe", error);
+            res.json({ status: "NOT OK", msg: "Tekninen virhe!" });
+        }
+        else {
+            res.statusCode = 200;
+            res.json(result);
+        }
+    })
+
+})
+
 app.listen(port, () => {
     console.log('Server started on port 3004')
 })

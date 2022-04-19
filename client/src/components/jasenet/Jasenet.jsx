@@ -92,7 +92,7 @@ const JasenForm = (props) => {
   const [sukunimi, setSukunimi] = useState("");
   const [paikkakunta, setPaikkakunta] = useState("");
   const [kuvaus, setKuvaus] = useState("");
-
+  const [kuva, setKuva] = useState ("");
 
   useEffect(() => {
     if (jasentie) {
@@ -100,6 +100,7 @@ const JasenForm = (props) => {
       setSukunimi(jasentie.sukunimi);
       setPaikkakunta(jasentie.paikkakunta);
       setKuvaus(jasentie.kuvaus);
+      setKuva(jasentie.kuva);
     }
   }, [jasentie]);
 
@@ -121,8 +122,8 @@ const Jasen = (props) => {
       <TableCell>{t.sukunimi}</TableCell>
       <TableCell>{t.nimimerkki}</TableCell>
       <TableCell>{t.paikkakunta}</TableCell>
-      <TableCell>{t.id}</TableCell>
       <TableCell>{t.esittely}</TableCell>
+      <TableCell><img src={t.kuva} alt="Example3" width="100" height="100"></img></TableCell>
 
     </TableRow>
   ))
@@ -137,8 +138,8 @@ const Jasen = (props) => {
             <TableCell>Sukunimi</TableCell>
             <TableCell>Nimimerkki</TableCell>
             <TableCell>Paikkakunta</TableCell>
-            <TableCell>ID</TableCell>
             <TableCell>Esittely</TableCell>
+            <TableCell>Kuva</TableCell>
 
           </TableRow>
         </TableHead>
