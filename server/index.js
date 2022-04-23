@@ -219,7 +219,7 @@ app.post('/tarina', (req, res) => {
     let kuvausteksti = req.body.kuvausteksti;
     let kuva = req.body.kuva;
 
-    let query = "INSERT INTO tarina (teksti, idmatkakohde, pvm) VALUES (?, ?, ?) ";
+    let query = "INSERT INTO tarina (teksti, idmatkakohde, pvm) VALUES (?, ?, NOW()) ";
 
     console.log("query:" + query);
 
@@ -239,6 +239,34 @@ app.post('/tarina', (req, res) => {
 
     });
 })
+
+/*app.post('/tarina/kuva', (req, res) => {
+
+
+  
+    let kuva = req.body.kuva;
+    let idtarina = req.body.idtarina;
+
+    let query = "INSERT INTO kuva (kuva, idtarina) VALUES (?, ?) ";
+
+    console.log("query:" + query);
+
+    connection.query(query, [kuva, idtarina], function (error, result, fields) {
+
+
+        if (error) {
+            console.log("Virhe", error);
+            res.statusCode = 400;
+            //res.json({ status: "NOT OK", message: "Pakollisia tietoja puuttuu:" + kentat });
+        }
+        else {
+            console.log("R:", result);
+            res.statusCode = 201;
+            res.json({  teksti: teksti, pvm: pvm })
+        }
+
+    });
+})*/
 
 app.get('/jasenet', (req, res) => {
 

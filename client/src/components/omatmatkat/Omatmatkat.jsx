@@ -37,8 +37,10 @@ export const Omatmatkat = () => {
   const [matkaInserted, setMatkaInserted] = useState(null);
   const [matkadeleted, setMatkaDeleted] = useState(null);
   const [matkamodified, setMatkaModified] = useState(null);
-
+  const [kuvaInserted, setKuvaInserted] = useState(null);
   const [showEditForm, setshowEditForm] = useState(false);
+  const [kuva, setKuva] = useState("");
+  const [idmatkakohde, setIdMatkakohde] = useState();
 
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export const Omatmatkat = () => {
       //   }));
       let newdata = [];
       for (let row of data) {
-        const imagesresponse = await fetch("http://localhost:3004/tarina/" + row.idtarina + "/kuva"); 
+        const imagesresponse = await fetch("http://localhost:3004/tarina/" + row.idtarina + "/kuva");
         const imagesdata = await imagesresponse.json();
         newdata.push({ ...row, kuvat: imagesdata })
       }
@@ -67,7 +69,7 @@ export const Omatmatkat = () => {
   }, [])
 
 
- //-------------------POISTA----------------------------------
+  //-------------------POISTA----------------------------------
 
   console.log("tarinat", tarinat)
 
@@ -75,7 +77,7 @@ export const Omatmatkat = () => {
     console.log("matka del", matkadeleted)
     const deleteMatka = async () => {
       const r = await fetch(
-        "http://localhost:3004/tarina/" + matkadeleted.idtarina, 
+        "http://localhost:3004/tarina/" + matkadeleted.idtarina,
         {
           method: "DELETE",
         }
@@ -92,7 +94,7 @@ export const Omatmatkat = () => {
   };
 
   const deleteClicked = (a) => {
-    
+
     const r = window.confirm(`Haluatko varmasti poistaa tarinan ID:llä ${a.idtarina}?`);
     console.log("ärrä: ")
     if (r) onDelete(a);
@@ -102,7 +104,7 @@ export const Omatmatkat = () => {
 
   //-----------------------------LISÄÄ---------------------
 
-  
+
   useEffect(() => {
     const insertMatka = async () => {
       const r = await fetch("http://localhost:3004/tarina/", {
@@ -111,7 +113,7 @@ export const Omatmatkat = () => {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          idtarina: matkaInserted.idtarina,
+          idmatkakohde: matkaInserted.idmatkakohde,
           teksti: matkaInserted.teksti,
           pvm: matkaInserted.pvm,
           //kuvausteksti: matkaInserted.kuvausteksti,
@@ -126,6 +128,28 @@ export const Omatmatkat = () => {
     if (matkaInserted != null) insertMatka();
   }, [matkaInserted]);
 
+ /* useEffect(() => {
+    const insertKuva = async () => {
+      const r = await fetch("http://localhost:3004/tarina/kuva", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          idtarina: kuvaInserted.idtarina,
+          kuva: kuvaInserted.kuva
+          //kuvausteksti: matkaInserted.kuvausteksti,
+          //kuva: matkaInserted.kuva,
+
+        }),
+      });
+      console.log("INSERT:", r);
+      setQuery(doSearchQuery(tarinat));
+      setKuvaInserted(null);
+    };
+    if (kuvaInserted != null) insertKuva();
+  }, [kuvaInserted]);*/
+
   //---------------------LISÄÄ LOPPUU-------------------
 
   const onCancel = () => {
@@ -138,47 +162,78 @@ export const Omatmatkat = () => {
     else setMatkaInserted(newTarina);
     setshowEditForm(false);
   };
- 
+
+ /* const kuvaClicked = () =>{
+    setKuvaInserted(true);
+  }*/
+
+  
+
   return (
     <Grid container spacing={2} sx={{ width: "80%", margin: "auto" }}>
-                  <Grid item>
-            <Button variant="outlined" onClick={() => {
-              setMatkaModified(undefined)
-              setshowEditForm(true)
-            }}>
-              Lisää uusi
-            </Button>
-            
-            <KohdeForm
-        onSave={onSave}
-        onCancel={onCancel}
-        tarina={setMatkaModified}
-      />
-          </Grid>
-      {tarinat.length > 0 &&
-        tarinat.map((tarina, i) => {
-          return (
-            <Grid sx={{margin: "auto"}}>
-                <h3>Matka {tarina.kohdenimi} ID: {tarina.idtarina}</h3>
-              <ImageList key={i} sx={{ width: 500, height: 200, margin: "auto"}} cols={3} rowHeight={164}>
-                {tarina.kuvat.map((item, i) => (
 
-                  <ImageListItem key={i} sx={{margin: "auto"}}>
-                    <img
-                      src={item.kuva}
-                    // srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                    // alt={item.title}
-                    // loading="lazy"
-                    />
-                  </ImageListItem>
-                ))}
-              </ImageList>
-              <p>{tarina.teksti}</p>
-              <Button size="small" onClick={() => deleteClicked(tarina)}>
-              Poista {tarina.id}
-              </Button>
-            </Grid>
-        )})}
+      <Button variant="outlined" onClick={() => {
+        setMatkaModified(undefined)
+        setshowEditForm(true)
+      }}>
+        Lisää uusi
+      </Button>
+      {showEditForm ? (
+
+        <KohdeForm
+          onSave={onSave}
+          onCancel={onCancel}
+          tarina={matkamodified}
+        />
+      ) : (
+        <div>
+
+          {tarinat.length > 0 &&
+            tarinat.map((tarina, i) => {
+              return (
+                <Grid sx={{ margin: "auto" }}>
+                  <h3>Matka {tarina.kohdenimi} ID: {tarina.idmatkakohde}</h3>
+                  <ImageList key={i} sx={{ width: 500, height: 200, margin: "auto" }} cols={3} rowHeight={164}>
+                    {tarina.kuvat.map((item, i) => (
+
+                      <ImageListItem key={i} sx={{ margin: "auto" }}>
+                        <img
+                          src={item.kuva}
+                          // srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                          // alt={item.title}
+                          loading="lazy"
+                        />
+                      </ImageListItem>
+                    ))}
+                  </ImageList>
+                  <p>{tarina.teksti}</p>
+                  <Button size="small" onClick={() => deleteClicked(tarina)}>
+                    Poista {tarina.id}
+                  </Button>
+                  {/* <Button size="small" onClick={() => kuvaClicked()}>
+                    LISÄÄ KUVA
+                  </Button>
+                  <TextField
+                    label="Kuvan url"
+                    id="filled-size-normal"
+                    defaultValue=""
+                    variant="filled"
+                    value={kuva}
+                    onChange={(e) => setKuva(e.target.value)}
+                  />
+                  <TextField
+                    label="Matkakohde id"
+                    id="filled-size-normal"
+                    defaultValue=""
+                    variant="filled"
+                    value={idtarina}
+                    onChange={(e) => setIdtarina(e.target.value)}
+                  /> */}
+                </Grid>
+              )
+            })}
+        </div>
+      )}
     </Grid >
   )
 
@@ -188,7 +243,7 @@ const KohdeForm = (props) => {
   const { onCancel, onSave, tarina } = props;
 
   const [teksti, setTeksti] = useState("");
-  const [idtarina, setIdtarina] = useState("");
+  const [idmatkakohde, setIdMatkakohde] = useState("");
   const [pvm, setPvm] = useState("");
   const [kuvausteksti, setKuvausteksti] = useState("");
   const [kuva, setKuva] = useState("");
@@ -197,14 +252,14 @@ const KohdeForm = (props) => {
   const tallennaClicked = () => {
     let id = -1;
     if (tarina) id = tarina.idtarina;
-    onSave({ id : id, teksti : teksti, pvm : pvm });
+    onSave({ id: id, teksti: teksti, pvm: pvm, idmatkakohde: idmatkakohde });
   };
 
   useEffect(() => {
     if (tarina) {
       console.log("iftarina", tarina)
-      setIdtarina(tarina.idtarina);
-      setPvm(tarina.Pvm);
+      setIdMatkakohde(tarina.idmatkakohde);
+      setPvm(tarina.pvm);
       setTeksti(tarina.teksti);
 
     }
@@ -227,12 +282,12 @@ const KohdeForm = (props) => {
       )}
       <Grid item>
         <TextField
-          label="id tarina"
+          label="id matkakohde"
           id="filled-size-normal"
           defaultValue=""
           variant="filled"
-          value={idtarina}
-          onChange={(e) => setIdtarina(e.target.value)}
+          value={idmatkakohde}
+          onChange={(e) => setIdMatkakohde(e.target.value)}
         />
       </Grid>
       <Grid item>
