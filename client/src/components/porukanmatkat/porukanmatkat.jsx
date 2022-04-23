@@ -1,17 +1,49 @@
 import React from 'react'
 import { Navbar, Header } from '../common';
-import { useState, useEffect } from "react";
+import { styled } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+//import Collapse from '@mui/material/Collapse';
+import { Collapse } from 'react-collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { red } from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Grid from '@mui/material/Grid';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import classNames from "classnames";
+import { useState, useEffect } from "react";
 
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 
 export const Porukanmatkat = () => {
 
   const [tarinat, setTarinat] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(null);
 
+  const [expanded, setExpanded] = React.useState(false);
 
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   useEffect(() => {
     const fetchKohde = async () => {
@@ -39,34 +71,100 @@ export const Porukanmatkat = () => {
   }, [])
 
  
-  console.log("tarinat", tarinat)
- 
-  return (
-    <Grid container spacing={2} sx={{ width: "80%", margin: "auto" }}>
 
+  console.log("tarinat", tarinat)
+
+  return (
+    <Grid sx={{ width: "80%", margin: "auto" }}>
+      <h1>Kaikki tarinat</h1>
+    <Grid container spacing={3} sx={{ width: "80%", margin: "auto" }}>
       {tarinat.length > 0 &&
         tarinat.map((tarina, i) => {
           return (
-            <Grid sx={{margin: "auto"}}>
-                <h3>Matkakohde {tarina.kohdenimi} ID: {tarina.idmatkakohde}</h3>
-              <ImageList key={i} sx={{ width: 500, height: 200, margin: "auto"}} cols={3} rowHeight={164}>
-                {tarina.kuvat.map((item, i) => (
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 400 }}>
+              <CardHeader
+                avatar={
+                  <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                    R
+                  </Avatar>
+                }
+                action={
+                  <IconButton aria-label="settings">
+                    <MoreVertIcon />
+                  </IconButton>
+                }
+                title={tarina.kohdenimi}
+                subheader="September 14, 2016"
+              />
+              <CardMedia
+                component="img"
+                height="194"
+                image={tarina.kuva}
+                alt="Paella dish"
+              />
+              <CardContent>
+                <Typography variant="body2" color="text.secondary">
+                   {tarina.kuvausteksti}
+                </Typography>
+              </CardContent>
+              <CardActions disableSpacing>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+                <ExpandMore
+                  expand={expanded}
+                  onClick={event => setActiveIndex(
+                    activeIndex === i ? null : i
+                )}
+                data-target="#collapseExample"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+                >
+                  <ExpandMoreIcon />
+                </ExpandMore>
+              </CardActions>
+              <Collapse isOpened={activeIndex === i}  timeout="auto" unmountOnExit>
+                <div
+              className={classNames("alert alert-info msg", {
+                    show: activeIndex === i,
+                    hide: activeIndex !== i
+                    })}
+                ><a>
+                <CardContent>
+                  <Typography paragraph>Tarina {1 + i} matkakohde:{tarina.kohdenimi} </Typography>
+                  <ImageList sx={{ width: 250, height: 200, margin: "auto" }} cols={2} rowHeight={164}>
+                    {tarina.kuvat.map((item, i) => (
 
-                  <ImageListItem key={i} sx={{margin: "auto"}}>
-                    <img
-                      src={item.kuva}
-                    // srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                    // alt={item.title}
-                    // loading="lazy"
-                    />
-                  </ImageListItem>
-                ))}
-              </ImageList>
-              
-              <p>{tarina.teksti}</p>
+                      <ImageListItem key={i} sx={{ margin: "auto" }}>
+                        <img
+                          src={item.kuva}
+                          srcSet={`${item.kuva}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                          //alt={item.title}
+                          loading="lazy"
+                        />
+                      </ImageListItem>
+                    ))} </ImageList>
+                  <Typography paragraph>
+                    {tarina.teksti}
+                  </Typography>
+                  
+                  <Typography>
+                    
+                  </Typography>
+                </CardContent>
+                </a>
+                </div>
+              </Collapse>
+            </Card>
             </Grid>
-        )})}
+          )
+        })}
     </Grid >
+    </Grid>
   )
 
 }
