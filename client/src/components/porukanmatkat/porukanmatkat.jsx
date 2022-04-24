@@ -85,23 +85,19 @@ export const Porukanmatkat = () => {
             <Card sx={{ maxWidth: 400 }}>
               <CardHeader
                 avatar={
-                  <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                    R
+                  <Avatar sx={{ bgcolor:  "#4caf50"}} aria-label="Tarina">
+                    T
                   </Avatar>
                 }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
-                }
+                
                 title={tarina.kohdenimi}
-                subheader="September 14, 2016"
+                subheader={tarina.pvm}
               />
               <CardMedia
                 component="img"
                 height="194"
                 image={tarina.kuva}
-                alt="Paella dish"
+                alt="tarina"
               />
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
@@ -113,7 +109,7 @@ export const Porukanmatkat = () => {
                   <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
-                  <ShareIcon />
+                  
                 </IconButton>
                 <ExpandMore
                   expand={expanded}
