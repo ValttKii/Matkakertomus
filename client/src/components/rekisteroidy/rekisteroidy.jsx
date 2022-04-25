@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,7 +29,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export function Rekisteroidy() {
+export function Rekisteroidy(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -38,6 +38,56 @@ export function Rekisteroidy() {
       password: data.get('password'),
     });
   };
+
+  const [matkaajaInserted, setMatkaajaInserted] = useState(null);
+  const [firstnameReg, setFirstnameReg] = useState('');
+  const [lastnameReg, setLastnameReg] = useState('');
+  const [emailReg, setEmailReg] = useState('');
+  const [passwordReg, setPasswordReg] = useState('');
+  const [ matkaaja, setMatkaaja ] = useState('');
+
+
+  const onSave = (newMatkaaja) => {
+     setMatkaajaInserted(newMatkaaja);
+  };
+
+  const tallennaClicked = () => {
+    onSave({ firstnameReg : firstnameReg, lastnameReg : lastnameReg, emailReg: emailReg, passwordReg : passwordReg });
+  };
+
+
+  useEffect(() => {
+    if (matkaaja) {
+      setFirstnameReg(matkaaja.etunimi);
+      setLastnameReg(matkaaja.sukunimi);
+      setEmailReg(matkaaja.email);
+      setPasswordReg(matkaaja.password);
+    }
+  }, [matkaaja]);
+  
+
+  useEffect(() => {
+    const insertMatkaaja = async () => {
+      const r = await fetch("http://localhost:3004/matkaaja", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          etunimi: matkaajaInserted.etunimi,
+          sukunimi: matkaajaInserted.sukunimi,
+          email: matkaajaInserted.email,
+          password: matkaajaInserted.password,
+
+        }),
+      });
+      console.log("INSERT:", r);
+      setMatkaajaInserted(null);
+    };
+    if (matkaajaInserted != null) insertMatkaaja();
+  }, [matkaajaInserted]);
+
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -67,6 +117,8 @@ export function Rekisteroidy() {
                   id="firstName"
                   label="Etunimi"
                   autoFocus
+                  value={firstnameReg}
+                  onChange={(e) => setFirstnameReg(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -77,6 +129,8 @@ export function Rekisteroidy() {
                   label="Sukunimi"
                   name="lastName"
                   autoComplete="family-name"
+                  value={lastnameReg}
+                  onChange={(e) => setLastnameReg(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -87,6 +141,8 @@ export function Rekisteroidy() {
                   label="Sähköposti"
                   name="email"
                   autoComplete="email"
+                  value={emailReg}
+                  onChange={(e) => setEmailReg(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -98,6 +154,8 @@ export function Rekisteroidy() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={passwordReg}
+                  onChange={(e) => setPasswordReg(e.target.value)}
                 />
               </Grid>
             </Grid>
@@ -106,6 +164,7 @@ export function Rekisteroidy() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={() => tallennaClicked()}
             >
               Rekisteröi käyttäjä
             </Button>

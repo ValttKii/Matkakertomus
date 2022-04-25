@@ -268,6 +268,37 @@ app.post('/tarina', (req, res) => {
     });
 })*/
 
+app.post('/matkaaja', (req, res) => {
+
+    console.log("/matkaaja. BODY:", req.body);
+
+    let etunimi = req.body.etunimi;
+    let sukunimi = req.body.sukunimi;
+    let email = req.body.email;
+    let password = req.body.password;
+
+
+    let query = "INSERT INTO matkaaja (etunimi, sukunimi, email, password) VALUES (?, ?, ?, ?) ";
+
+    console.log("query:" + query);
+
+    connection.query(query, [etunimi, sukunimi, email, password], function (error, result, fields) {
+
+
+        if (error) {
+            console.log("Virhe", error);
+            res.statusCode = 400;
+            //res.json({ status: "NOT OK", message: "Pakollisia tietoja puuttuu:" + kentat });
+        }
+        else {
+            console.log("R:", result);
+            res.statusCode = 201;
+            res.json({ etunimi : etunimi, sukunimi : sukunimi, email : email, password : password })
+        }
+
+    });
+})
+
 app.get('/jasenet', (req, res) => {
 
     let etunimi = req.query.etunimi;
