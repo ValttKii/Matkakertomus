@@ -3,190 +3,127 @@ import { Navbar, Header } from '../common';
 //import React, { useState, Fragment } from "react";
 import { nanoid } from "nanoid";
 import "./Omattiedot.css";
-import data from "./omattiedottaulu.json";
-import ReadOnlyRow from "./ReadOnlyRow";
-import EditableRow from "./EditableRow";
+import TableCell from '@mui/material/TableCell';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper';
+import TableHead from '@mui/material/TableHead';
+import TableContainer from '@mui/material/TableContainer';
+//import data from "./omattiedottaulu.json";
+import { useState, useEffect } from "react";
+import axios from "axios"
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
 
 
 
-import { useState, Fragment } from "react";
 
-const Omattiedot = () => {
-    const [contacts, setContacts] = useState(data);
-  const [addFormData, setAddFormData] = useState({
-    fullName: "",
-    address: "",
-    phoneNumber: "",
-    email: "",
-  });
 
-  const [editFormData, setEditFormData] = useState({
-    fullName: "",
-    address: "",
-    phoneNumber: "",
-    email: "",
-  });
 
-  const [editContactId, setEditContactId] = useState(null);
 
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
+export const Omattiedot = () => {
 
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
+  const [etunimi, setEtunimi] = useState("");
+  const [sukunimi, setSukunimi] = useState("");
+  const [nimimerkki, setNimimerkki] = useState("");
+  const [id, setId] = useState("");
+  const [paikkakunta, setPaikkakunta] = useState("");
+  const [esittely, setEsittely] = useState("");
+  const [kuva, setKuva] = useState("");
+  const [jasen, setJasen] = useState([]);
+  const [modifiedAsiakas, setModifiedAsiakas] = useState(null);
+  const [asiakasmodified, setAsiakasModified] = useState(false);
+  const [muutettavaid, setMuutettavaId] = useState(-1);
 
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
+  useEffect(() => {
+    const fetchJasen = async () => {
+      const response = await fetch("http://localhost:3004/omattiedot");
+      const data = await response.json();
+      setJasen(data);
+    }
+     fetchJasen();
+  }, [])
 
-    setAddFormData(newFormData);
-  };
-
-  const handleEditFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...editFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setEditFormData(newFormData);
-  };
-
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
-
-    const newContact = {
-      id: nanoid(),
-      fullName: addFormData.fullName,
-      address: addFormData.address,
-      phoneNumber: addFormData.phoneNumber,
-      email: addFormData.email,
+  useEffect(() => {
+    const modifyAsiakas = async () => {
+      const r = await fetch(
+        "http://localhost:3004/matkakohde/" + modifiedAsiakas.id,
+        {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            etunimi: modifiedAsiakas.etunimi,
+            sukunimi: modifiedAsiakas.sukunimi,
+            nimimerkki: modifiedAsiakas.nimimerkki,
+            paikkakunta: modifiedAsiakas.paikkakunta,
+            esittely: modifiedAsiakas.esittely,
+            kuva: modifiedAsiakas.kuva,
+          }),
+        }
+      );
+      console.log("MODIFY:", r);
+      setModifiedAsiakas(null);
+      setAsiakasModified(null);
     };
+    if (modifiedAsiakas != null) modifyAsiakas();
+  }, [modifiedAsiakas]);
 
-    const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
+  const onEdit = (asiakas) => {
+    console.log("Setting asiakas", asiakas)
+    setMuutettavaId(asiakas.idmatkaaja);
+
   };
+  
+  
+ 
 
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault();
 
-    const editedContact = {
-      id: editContactId,
-      fullName: editFormData.fullName,
-      address: editFormData.address,
-      phoneNumber: editFormData.phoneNumber,
-      email: editFormData.email,
-    };
-
-    const newContacts = [...contacts];
-
-    const index = contacts.findIndex((contact) => contact.id === editContactId);
-
-    newContacts[index] = editedContact;
-
-    setContacts(newContacts);
-    setEditContactId(null);
-  };
-
-  const handleEditClick = (event, contact) => {
-    event.preventDefault();
-    setEditContactId(contact.id);
-
-    const formValues = {
-      fullName: contact.fullName,
-      address: contact.address,
-      phoneNumber: contact.phoneNumber,
-      email: contact.email,
-    };
-
-    setEditFormData(formValues);
-  };
-
-  const handleCancelClick = () => {
-    setEditContactId(null);
-  };
-
-  const handleDeleteClick = (contactId) => {
-    const newContacts = [...contacts];
-
-    const index = contacts.findIndex((contact) => contact.id === contactId);
-
-    newContacts.splice(index, 1);
-
-    setContacts(newContacts);
-  };
+  const rows = jasen.map((user,key) => (
+    <TableRow key={key}>
+      <TableCell>{user.idmatkaaja}</TableCell>
+      <TableCell>{user.etunimi}</TableCell>
+      <TableCell>{user.sukunimi}</TableCell>
+      <TableCell>{user.nimimerkki}</TableCell>
+      <TableCell>{user.paikkakunta}</TableCell>
+      <TableCell>{user.esittely}</TableCell>
+      <TableCell><img src={user.kuva} alt="Example3" width="80" height="100"></img></TableCell>
+    </TableRow>
+    
+  ))
 
   return (
-    <div className="app-container">
-      <form onSubmit={handleEditFormSubmit}>
-          <h1>Matkaaja taulu</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Nimi</th>
-              <th>Osoite</th>
-              <th>Puhelinnumero</th>
-              <th>Sähköposti</th>
-              <th>Valitse toiminto</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contacts.map((contact) => (
-              <Fragment>
-                {editContactId === contact.id ? (
-                  <EditableRow
-                    editFormData={editFormData}
-                    handleEditFormChange={handleEditFormChange}
-                    handleCancelClick={handleCancelClick}
-                  />
-                ) : (
-                  <ReadOnlyRow
-                    contact={contact}
-                    handleEditClick={handleEditClick}
-                    handleDeleteClick={handleDeleteClick}
-                  />
-                )}
-              </Fragment>
-            ))}
-          </tbody>
-        </table>
-      </form>
+    
+    <TableContainer sx={{ width: "80%", margin: "auto" }} component={Paper}>
 
-      <h2>Lisää uusi käyttäjä</h2>
-      <form onSubmit={handleAddFormSubmit}>
-        <input
-          type="text"
-          name="fullName"
-          required="required"
-          placeholder="Syötä nimesi..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="address"
-          required="required"
-          placeholder="Syötä kotiosoite..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="phoneNumber"
-          required="required"
-          placeholder="Syötä puhelinnumero..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="email"
-          name="email"
-          required="required"
-          placeholder="Syötä sähköpostiosoite..."
-          onChange={handleAddFormChange}
-        />
-        <button type="submit">Lisää</button>
-      </form>
-    </div>
+      <Table sx={{}} size="small" aria-label="a dense table">
+        <TableHead>
+          <TableRow>
+          <TableCell>ID</TableCell>
+            <TableCell>Etunimi</TableCell>
+            <TableCell>Sukunimi</TableCell>
+            <TableCell>Nimimerkki</TableCell>
+            <TableCell>Paikkakunta</TableCell>
+            <TableCell>Esittely</TableCell>
+            <TableCell>Kuva</TableCell>
+
+          </TableRow>
+        </TableHead>
+        <TableBody>{rows}</TableBody>
+      </Table>
+    </TableContainer>
+    
   );
-};
+}
+
+                      
+
+        
+
+
+
 
 export default Omattiedot;
