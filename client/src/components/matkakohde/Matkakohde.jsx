@@ -74,10 +74,15 @@ export const Matkakohde = () => {
         {
           method: "DELETE",
         }
-      );
+      )
+      if(r.status === 400){
+        
+        window.confirm(`Kyseisellä matkakohteella on tarina, joten sitä ei voi poistaa. `);
+      }
       console.log("DELETE:", r);
       setQuery(doSearchQuery(maa));
     };
+    
     if (kohdedeleted) deleteKohde();
   }, [kohdedeleted]);
 

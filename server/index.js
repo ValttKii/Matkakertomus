@@ -18,8 +18,8 @@ app.use(cors);
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',      // ÄLÄ KOSKAAN käytä root:n tunnusta tuotannossa
-    password: '',
-    database: 'mydb',
+    password: 'root',
+    database: 'mykanta',
     dateStrings: true
 });
 
@@ -185,6 +185,88 @@ app.get('/tarina/:id/kuva', (req, res) => {
         }
     })
 })
+ app.delete('/tarina/:id', (req, res) => {
+
+
+    let id = req.params.id;
+
+    let query = "DELETE FROM tarina where idtarina = ? "
+
+    connection.query(query, [id], function(error, result, fields){
+        if (error) {
+            console.log("Virhe", error);
+            res.statusCode = 400;
+            res.json({ status: "NOT OK", msg: "Tekninen virhe!" });
+        }
+        else {
+            console.log("R:", result);
+            res.statusCode = 204;   // 204 -> No content -> riittää palauttaa vain statuskoodi
+
+            // HUOM! Jotain pitää aina palauttaa, jotta node "lopettaa" tämän suorituksen.
+            // Jos ao. rivi puuttuu, jää kutsuja odottamaan että jotain palautuu api:sta
+            res.json()
+        }
+    })
+
+})
+app.post('/tarina', (req, res) => {
+
+
+    let teksti = req.body.teksti;
+    let idmatkakohde = req.body.idmatkakohde;
+    let pvm = req.body.pvm;
+
+    let kuvausteksti = req.body.kuvausteksti;
+    let kuva = req.body.kuva;
+
+    let query = "INSERT INTO tarina (teksti, idmatkakohde, pvm) VALUES (?, ?, NOW()) ";
+
+    console.log("query:" + query);
+
+    connection.query(query, [teksti, idmatkakohde, pvm], function (error, result, fields) {
+
+
+        if (error) {
+            console.log("Virhe", error);
+            res.statusCode = 400;
+            //res.json({ status: "NOT OK", message: "Pakollisia tietoja puuttuu:" + kentat });
+        }
+        else {
+            console.log("R:", result);
+            res.statusCode = 201;
+            res.json({ idmatkakohde : idmatkakohde, teksti: teksti, pvm: pvm })
+        }
+
+    });
+})
+
+/*app.post('/tarina/kuva', (req, res) => {
+
+
+  
+    let kuva = req.body.kuva;
+    let idtarina = req.body.idtarina;
+
+    let query = "INSERT INTO kuva (kuva, idtarina) VALUES (?, ?) ";
+
+    console.log("query:" + query);
+
+    connection.query(query, [kuva, idtarina], function (error, result, fields) {
+
+
+        if (error) {
+            console.log("Virhe", error);
+            res.statusCode = 400;
+            //res.json({ status: "NOT OK", message: "Pakollisia tietoja puuttuu:" + kentat });
+        }
+        else {
+            console.log("R:", result);
+            res.statusCode = 201;
+            res.json({  teksti: teksti, pvm: pvm })
+        }
+
+    });
+})*/
 
 app.get('/jasenet', (req, res) => {
 
