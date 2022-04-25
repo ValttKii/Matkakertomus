@@ -128,7 +128,7 @@ export const Omatmatkat = () => {
   }, [matkadeleted]);
 
   const onDelete = (tarina) => {
-    console.log("TARINA SAATANA", tarina);
+    console.log("HEILAHTI", tarina);
     setMatkaDeleted(tarina);
   };
 

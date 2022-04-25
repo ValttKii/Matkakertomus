@@ -123,7 +123,7 @@ const Jasen = (props) => {
       <TableCell>{t.nimimerkki}</TableCell>
       <TableCell>{t.paikkakunta}</TableCell>
       <TableCell>{t.esittely}</TableCell>
-      <TableCell><img src={t.kuva} alt="Example3" width="100" height="100"></img></TableCell>
+      <TableCell><img src={t.kuva} alt="?" width="100" height="100"></img></TableCell>
 
     </TableRow>
   ))

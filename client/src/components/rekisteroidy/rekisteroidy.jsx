@@ -48,22 +48,17 @@ export function Rekisteroidy(props) {
 
 
   const onSave = (newMatkaaja) => {
+    console.log("MO", newMatkaaja)
      setMatkaajaInserted(newMatkaaja);
   };
 
   const tallennaClicked = () => {
-    onSave({ firstnameReg : firstnameReg, lastnameReg : lastnameReg, emailReg: emailReg, passwordReg : passwordReg });
+    console.log("MOMO", firstnameReg)
+    onSave({ firstnameReg, lastnameReg, emailReg, passwordReg });
   };
 
 
-  useEffect(() => {
-    if (matkaaja) {
-      setFirstnameReg(matkaaja.etunimi);
-      setLastnameReg(matkaaja.sukunimi);
-      setEmailReg(matkaaja.email);
-      setPasswordReg(matkaaja.password);
-    }
-  }, [matkaaja]);
+ 
   
 
   useEffect(() => {
@@ -74,13 +69,14 @@ export function Rekisteroidy(props) {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          etunimi: matkaajaInserted.etunimi,
-          sukunimi: matkaajaInserted.sukunimi,
-          email: matkaajaInserted.email,
-          password: matkaajaInserted.password,
+          etunimi: matkaajaInserted.firstnameReg,
+          sukunimi: matkaajaInserted.lastnameReg,
+          email: matkaajaInserted.emailReg,
+          password: matkaajaInserted.passwordReg,
 
         }),
       });
+      console.log("MATKAAJAINSERT:", matkaajaInserted);
       console.log("INSERT:", r);
       setMatkaajaInserted(null);
     };

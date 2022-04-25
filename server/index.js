@@ -18,7 +18,7 @@ app.use(cors);
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',      // ÄLÄ KOSKAAN käytä root:n tunnusta tuotannossa
-    password: 'root',
+    password: '',
     database: 'mykanta',
     dateStrings: true
 });
@@ -279,7 +279,7 @@ app.post('/matkaaja', (req, res) => {
 
 
     let query = "INSERT INTO matkaaja (etunimi, sukunimi, email, password) VALUES (?, ?, ?, ?) ";
-
+    
     console.log("query:" + query);
 
     connection.query(query, [etunimi, sukunimi, email, password], function (error, result, fields) {
@@ -293,6 +293,7 @@ app.post('/matkaaja', (req, res) => {
         else {
             console.log("R:", result);
             res.statusCode = 201;
+            console.log("query:" + result.affectedRows);
             res.json({ etunimi : etunimi, sukunimi : sukunimi, email : email, password : password })
         }
 
