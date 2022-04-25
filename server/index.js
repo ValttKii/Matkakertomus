@@ -289,6 +289,58 @@ app.get('/jasenet', (req, res) => {
     })
 
 })
+app.get('/omattiedot', (req, res) => {
+
+    let etunimi = req.query.etunimi;
+
+    let query = "SELECT * from matkaaja WHERE 1=1 "
+
+    if (etunimi) query = query + " AND etunimi LIKE '" + etunimi + "%" + "'";
+
+    connection.query(query, function (error, result, fields) {
+        console.log("done")
+        if (error) {
+            console.log("Virhe", error);
+            res.json({ status: "NOT OK", msg: "Tekninen virhe!" });
+        }
+        else {
+            res.statusCode = 200;
+            res.json(result);
+        }
+    })
+
+})
+app.put('/omattiedot/', (req, res) => {
+    let id = req.params.id;
+    let etunimi = req.body.etunimi;
+    let sukunimi = req.body.sukunimi;
+    let nimimerkki = req.body.nimimerkki;
+    let paikkakunta = req.body.paikkakunta;
+    let esittely = req.body.esittely;
+    let kuva = req.body.kuva;
+
+    let query = "UPDATE matkaaja SET etunimi=?, sukunimi=?, nimimerkki=?, paikkakunta=?, esittely=?, kuva=? where idmatkaaja = ? ";
+
+    connection.query(query, [etunimi, sukunimi, nimimerkki, paikkakunta, esittely, kuva, id], function (error, result, fields) {
+
+        if (error) {
+            console.log("Virhe", error);
+            res.statusCode = 400;
+            
+        }
+        else {
+            console.log("R:", result);
+            res.statusCode = 204;   // 204 -> No content -> riittää palauttaa vain statuskoodi
+
+            // HUOM! Jotain pitää aina palauttaa, jotta node "lopettaa" tämän suorituksen.
+            // Jos ao. rivi puuttuu, jää kutsuja odottamaan että jotain palautuu api:sta
+            res.json()
+        }
+    })
+
+})
+
+
 
 app.listen(port, () => {
     console.log('Server started on port 3004')
