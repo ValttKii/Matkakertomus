@@ -6,13 +6,37 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+//import Collapse from '@mui/material/Collapse';
+import { Collapse } from 'react-collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import { red } from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import classNames from "classnames"; import { tabScrollButtonClasses } from '@mui/material';
+import TextareaAutosize from '@mui/base/TextareaAutosize';
 
 
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 const doSearchQuery = (tarinat) => {
   let r = [];
@@ -29,6 +53,16 @@ const doSearchQuery = (tarinat) => {
 
 export const Omatmatkat = () => {
 
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+
+
   const [tarinat, setTarinat] = useState([]);
 
   const [query, setQuery] = useState("");
@@ -36,11 +70,16 @@ export const Omatmatkat = () => {
   const [idtarina, setIdtarina] = useState("");
   const [matkaInserted, setMatkaInserted] = useState(null);
   const [matkadeleted, setMatkaDeleted] = useState(null);
+
   const [matkamodified, setMatkaModified] = useState(null);
+  const [modifiedMatka, setModifiedMatka] = useState(null);
   const [kuvaInserted, setKuvaInserted] = useState(null);
   const [showEditForm, setshowEditForm] = useState(false);
   const [kuva, setKuva] = useState("");
   const [idmatkakohde, setIdMatkakohde] = useState();
+  const [muutettavaid, setMuutettavaId] = useState(-1);
+
+  const [muokkaaVailisää, setMuokkaaVaiLisää] = useState();
 
 
   useEffect(() => {
@@ -128,29 +167,55 @@ export const Omatmatkat = () => {
     if (matkaInserted != null) insertMatka();
   }, [matkaInserted]);
 
- /* useEffect(() => {
-    const insertKuva = async () => {
-      const r = await fetch("http://localhost:3004/tarina/kuva", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          idtarina: kuvaInserted.idtarina,
-          kuva: kuvaInserted.kuva
-          //kuvausteksti: matkaInserted.kuvausteksti,
-          //kuva: matkaInserted.kuva,
+  // useEffect(() => {
+  //   const insertKuva = async () => {
+  //     const r = await fetch("http://localhost:3004/tarina/kuva", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         idtarina: kuvaInserted.idtarina,
+  //         kuva: kuvaInserted.kuva
+  //         //kuvausteksti: matkaInserted.kuvausteksti,
+  //         //kuva: matkaInserted.kuva,
 
-        }),
-      });
-      console.log("INSERT:", r);
-      setQuery(doSearchQuery(tarinat));
-      setKuvaInserted(null);
-    };
-    if (kuvaInserted != null) insertKuva();
-  }, [kuvaInserted]);*/
+  //       }),
+  //     });
+  //     console.log("INSERT:", r);
+  //     setQuery(doSearchQuery(tarinat));
+  //     setKuvaInserted(null);
+  //   };
+  //   if (kuvaInserted != null) insertKuva();
+  // }, [kuvaInserted]);
 
   //---------------------LISÄÄ LOPPUU-------------------
+
+  //---------------------MUOKKAA------------------------
+
+  useEffect(() => {
+    const modifyMatka = async () => {
+      const r = await fetch(
+        "http://localhost:3004/tarina/" + modifiedMatka.id,
+        {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            teksti: modifiedMatka.teksti
+          }),
+        }
+      );
+      console.log("MODIFY:", r);
+      setQuery(doSearchQuery(tarinat));
+      setModifiedMatka(null);
+      setMatkaModified(null);
+    };
+    if (modifiedMatka != null) modifyMatka();
+  }, [modifiedMatka]);
+
+  //---------------------MUOKKAA LOPPU------------------
 
   const onCancel = () => {
     setshowEditForm(false);
@@ -158,26 +223,32 @@ export const Omatmatkat = () => {
   };
 
   const onSave = (newTarina) => {
-    if (newTarina.id > 0) setMatkaModified(newTarina);
+    if (newTarina.id > 0) setModifiedMatka(newTarina);
     else setMatkaInserted(newTarina);
     setshowEditForm(false);
   };
 
- /* const kuvaClicked = () =>{
-    setKuvaInserted(true);
-  }*/
+  const onEdit = (tarina) => {
+    console.log("Setting tarina", tarina)
+    setMuutettavaId(tarina.idmatkakohde);
+    setshowEditForm(true);
+  };
 
-  
+  // const kuvaClicked = () =>{
+  //   setKuvaInserted(true);
+  // }
+
 
   return (
-    <Grid container spacing={2} sx={{ width: "80%", margin: "auto" }}>
-
-      <Button variant="outlined" onClick={() => {
-        setMatkaModified(undefined)
-        setshowEditForm(true)
-      }}>
-        Lisää uusi
-      </Button>
+    <Grid sx={{ width: "80%", margin: "auto" }}>
+      <Grid container spacing={0} sx={{ width: "80%", margin: "20px" }} >
+        <Button variant="outlined" onClick={() => {
+          setMatkaModified(undefined)
+          setshowEditForm(true)
+        }}>
+          Lisää uusi
+        </Button>
+      </Grid>
       {showEditForm ? (
 
         <KohdeForm
@@ -186,31 +257,89 @@ export const Omatmatkat = () => {
           tarina={matkamodified}
         />
       ) : (
-        <div>
-
+        <Grid container spacing={3} sx={{ width: "80%", margin: "auto" }}>
           {tarinat.length > 0 &&
             tarinat.map((tarina, i) => {
               return (
-                <Grid sx={{ margin: "auto" }}>
-                  <h3>Matka {tarina.kohdenimi} ID: {tarina.idmatkakohde}</h3>
-                  <ImageList key={i} sx={{ width: 500, height: 200, margin: "auto" }} cols={3} rowHeight={164}>
-                    {tarina.kuvat.map((item, i) => (
+                <Grid item xs={4}>
+                  <Card sx={{ maxWidth: 400 }}>
+                    <CardHeader
+                      avatar={
+                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                          R
+                        </Avatar>
+                      }
+                      action={
+                        <IconButton aria-label="settings">
+                          <MoreVertIcon />
+                        </IconButton>
+                      }
+                      title={tarina.kohdenimi}
+                      subheader={tarina.pvm}
+                    />
+                    <CardMedia
+                      component="img"
+                      height="194"
+                      image={tarina.kuva}
+                      alt="Paella dish"
+                    />
+                    <CardContent>
+                      <Typography variant="body2" color="text.secondary">
+                        {tarina.kuvausteksti}
+                      </Typography>
+                    </CardContent>
 
-                      <ImageListItem key={i} sx={{ margin: "auto" }}>
-                        <img
-                          src={item.kuva}
-                          // srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                          // alt={item.title}
-                          loading="lazy"
-                        />
-                      </ImageListItem>
-                    ))}
-                  </ImageList>
-                  <p>{tarina.teksti}</p>
-                  <Button size="small" onClick={() => deleteClicked(tarina)}>
-                    Poista {tarina.id}
-                  </Button>
-                  {/* <Button size="small" onClick={() => kuvaClicked()}>
+                    <Button size="small" onClick={() => deleteClicked(tarina)}>
+                      Poista {tarina.id}
+                    </Button>
+
+                    <Button size="small" onClick={() => onEdit(tarina)}>
+                      Muokkaa tarinaa {tarina.id}
+                    </Button>
+
+                    <CardActions disableSpacing>
+                      <IconButton aria-label="add to favorites">
+                        <FavoriteIcon />
+                      </IconButton>
+                      <ExpandMore
+                        expand={expanded}
+                        onClick={event => setActiveIndex(
+                          activeIndex === i ? null : i
+                        )}
+                        data-target="#collapseExample"
+                        aria-expanded="false"
+                        aria-controls="collapseExample"
+                      >
+                        <ExpandMoreIcon />
+                      </ExpandMore>
+
+                    </CardActions>
+                    <Collapse isOpened={activeIndex === i} timeout="auto" unmountOnExit>
+                      <div
+                        className={classNames("alert alert-info msg", {
+                          show: activeIndex === i,
+                          hide: activeIndex !== i
+                        })}
+                      ><a>
+                          <CardContent>
+                            <Typography paragraph>Tarina {1 + i},  Matkakohde:{tarina.kohdenimi} </Typography>
+                            <ImageList key={i} sx={{ width: 500, height: 200, margin: "auto" }} cols={3} rowHeight={164}>
+                              {tarina.kuvat.map((item, i) => (
+
+                                <ImageListItem key={i} sx={{ margin: "auto" }}>
+                                  <img
+                                    src={item.kuva}
+                                    // srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                    // alt={item.title}
+                                    loading="lazy"
+                                  />
+                                </ImageListItem>
+                              ))}
+                            </ImageList>
+                            <Typography paragraph>
+                              <p>{tarina.teksti}</p>
+                            </Typography>
+                            {/* <Button size="small" onClick={() => kuvaClicked()}>
                     LISÄÄ KUVA
                   </Button>
                   <TextField
@@ -228,11 +357,16 @@ export const Omatmatkat = () => {
                     variant="filled"
                     value={idtarina}
                     onChange={(e) => setIdtarina(e.target.value)}
-                  /> */}
+                  />  */}
+                          </CardContent>
+                        </a>
+                      </div>
+                    </Collapse>
+                  </Card>
                 </Grid>
               )
             })}
-        </div>
+        </Grid>
       )}
     </Grid >
   )
@@ -282,32 +416,36 @@ const KohdeForm = (props) => {
       )}
       <Grid item>
         <TextField
-          label="id matkakohde"
+          label="ID (automaattinen)"
           id="filled-size-normal"
+          disabled="true"
           defaultValue=""
           variant="filled"
           value={idmatkakohde}
           onChange={(e) => setIdMatkakohde(e.target.value)}
         />
       </Grid>
+
       <Grid item>
         <TextField
-          label="teksti"
+          label="Pvm (automaattinen)"
           id="filled-size-normal"
-          defaultValue=""
-          variant="filled"
-          value={teksti}
-          onChange={(e) => setTeksti(e.target.value)}
-        />
-      </Grid>
-      <Grid item>
-        <TextField
-          label="Pvm"
-          id="filled-size-normal"
+          disabled="true"
           defaultValue=""
           variant="filled"
           value={pvm}
           onChange={(e) => setPvm(e.target.value)}
+        />
+      </Grid>
+      <Grid item>
+        <TextareaAutosize
+          placeholder='Tarina'
+          id="filled-size-normal"
+          defaultValue=""
+          variant="filled"
+          value={teksti}
+          style={{ width: 210, height: 35 }}
+          onChange={(e) => setTeksti(e.target.value)}
         />
       </Grid>
 
