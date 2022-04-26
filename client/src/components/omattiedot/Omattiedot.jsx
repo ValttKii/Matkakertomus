@@ -16,6 +16,8 @@ import { useState, useEffect } from "react";
 import axios from "axios"
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
+import Avatar from '@mui/material/Avatar';
+
 
 
 
@@ -90,7 +92,7 @@ export const Omattiedot = () => {
       <TableCell>{user.nimimerkki}</TableCell>
       <TableCell>{user.paikkakunta}</TableCell>
       <TableCell>{user.esittely}</TableCell>
-      <TableCell><img src={user.kuva} alt="Example3" width="80" height="100"></img></TableCell>
+      <Avatar alt="Prof pic" src={user.kuva}  />
     </TableRow>
     
   ))
