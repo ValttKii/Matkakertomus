@@ -28,7 +28,7 @@ function App() {
         <Route path="/kirjaudu" element={<Kirjaudu/>}/>
         <Route path="/porukanmatkat" element={<Porukanmatkat/>}/>
         <Route path="/omatmatkat" element={<Omatmatkat/>}/>
-
+        <Route path="*" element={<Etusivu />}/>
       </Routes>
       </Router>
       
