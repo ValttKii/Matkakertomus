@@ -16,9 +16,8 @@ import { useState, useEffect } from "react";
 import axios from "axios"
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-import Avatar from '@mui/material/Avatar';
-
-
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 
 
 
@@ -30,7 +29,7 @@ export const Omattiedot = () => {
   const [etunimi, setEtunimi] = useState("");
   const [sukunimi, setSukunimi] = useState("");
   const [nimimerkki, setNimimerkki] = useState("");
-  const [id, setId] = useState("");
+ // const [id, setId] = useState("");
   const [paikkakunta, setPaikkakunta] = useState("");
   const [esittely, setEsittely] = useState("");
   const [kuva, setKuva] = useState("");
@@ -41,7 +40,7 @@ export const Omattiedot = () => {
 
   useEffect(() => {
     const fetchJasen = async () => {
-      const response = await fetch("http://localhost:3004/omattiedot");
+      const response = await fetch("http://localhost:3004/omattiedot/" + 1);
       const data = await response.json();
       setJasen(data);
     }
@@ -51,7 +50,7 @@ export const Omattiedot = () => {
   useEffect(() => {
     const modifyAsiakas = async () => {
       const r = await fetch(
-        "http://localhost:3004/matkakohde/" + modifiedAsiakas.id,
+        "http://localhost:3004/omattiedotid/" + 1,
         {
           method: "PUT",
           headers: {
@@ -79,6 +78,20 @@ export const Omattiedot = () => {
     setMuutettavaId(asiakas.idmatkaaja);
 
   };
+
+  const onSave = (matkaaja) => {
+    setModifiedAsiakas(matkaaja);
+  };
+
+  const tallennaClicked = () => {
+    let id = -1;
+    onSave({ id: id, etunimi, sukunimi, nimimerkki, paikkakunta, esittely ,kuva });
+  };
+
+  const onCancel = () => {
+    setModifiedAsiakas(false);
+    setAsiakasModified(null);
+  };
   
   
  
@@ -92,15 +105,101 @@ export const Omattiedot = () => {
       <TableCell>{user.nimimerkki}</TableCell>
       <TableCell>{user.paikkakunta}</TableCell>
       <TableCell>{user.esittely}</TableCell>
-      <Avatar alt="Prof pic" src={user.kuva}  />
+      <TableCell><img src={user.kuva} alt="Example3" width="80" height="100"></img></TableCell>
+      <TableCell><Button
+      onClick={()=> {
+        setAsiakasModified(true)
+      }}>Muokkaa</Button></TableCell>
     </TableRow>
     
   ))
 
   return (
-    
-    <TableContainer sx={{ width: "80%", margin: "auto" }} component={Paper}>
+    <Grid>
+    {asiakasmodified ? (
+      <Grid container spacing={5}
+      direction={"column"}
+      alignItems="center"
+      justifyContent="center">
+       <Grid item>
+       <TextField
+         label="etunimi"
+         id="filled-size-normal"
+         defaultValue=""
+         variant="filled"
+         value={etunimi}
+         onChange={(e) => setEtunimi(e.target.value)}
+       />
+     </Grid>
+     <Grid item>
+       <TextField
+         label="sukunimi"
+         id="filled-size-normal"
+         defaultValue=""
+         variant="filled"
+         value={sukunimi}
+         onChange={(e) => setSukunimi(e.target.value)}
+       />
+     </Grid>
+     <Grid item>
+       <TextField
+         label="nimimerkki"
+         id="filled-size-normal"
+         defaultValue=""
+         variant="filled"
+         value={nimimerkki}
+         onChange={(e) => setNimimerkki(e.target.value)}
+       />
+     </Grid>
+     <Grid item>
+       <TextField
+         label="paikkakunta"
+         id="filled-size-normal"
+         defaultValue=""
+         variant="filled"
+         value={paikkakunta}
+         onChange={(e) => setPaikkakunta(e.target.value)}
+       />
 
+     </Grid>
+     <Grid item>
+       <TextField
+         id="filled-multiline-flexible"
+         label="esittely"
+         multiline
+         maxRows={4}
+         variant="filled"
+         value={esittely}
+         onChange={(e) => setEsittely(e.target.value)}
+       />
+     </Grid>
+     <Grid item>
+       <TextField
+         id="filled-multiline-flexible"
+         label="Kuvan url"
+         multiline
+         maxRows={4}
+         variant="filled"
+         value={kuva}
+         onChange={(e) => setKuva(e.target.value)}
+       />
+     </Grid>
+     <Grid item>
+          <Button onClick={() => tallennaClicked()}>
+            Tallenna
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button onClick={() => onCancel()}>
+            Peruuta
+          </Button>
+        </Grid>
+     
+     </Grid>
+
+      ) :(
+    <TableContainer sx={{ width: "80%", margin: "auto" }} component={Paper}>
+        
       <Table sx={{}} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
@@ -111,21 +210,17 @@ export const Omattiedot = () => {
             <TableCell>Paikkakunta</TableCell>
             <TableCell>Esittely</TableCell>
             <TableCell>Kuva</TableCell>
+            
 
           </TableRow>
         </TableHead>
         <TableBody>{rows}</TableBody>
       </Table>
     </TableContainer>
+    )}
+    </Grid>
     
   );
 }
-
-                      
-
-        
-
-
-
 
 export default Omattiedot;

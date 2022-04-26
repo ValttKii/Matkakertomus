@@ -321,15 +321,16 @@ app.get('/jasenet', (req, res) => {
     })
 
 })
-app.get('/omattiedot', (req, res) => {
+ app.get('/omattiedot/:id', (req, res) => {
 
+    let id = req.params.id;
     let etunimi = req.query.etunimi;
 
-    let query = "SELECT * from matkaaja WHERE 1=1 "
+    let query = "SELECT * from matkaaja WHERE idmatkaaja = ?"
 
-    if (etunimi) query = query + " AND etunimi LIKE '" + etunimi + "%" + "'";
+   // if (etunimi) query = query + " AND etunimi LIKE '" + etunimi + "%" + "'";
 
-    connection.query(query, function (error, result, fields) {
+    connection.query(query,[id], function (error, result, fields) {
         console.log("done")
         if (error) {
             console.log("Virhe", error);
@@ -342,7 +343,7 @@ app.get('/omattiedot', (req, res) => {
     })
 
 })
-app.put('/omattiedot/', (req, res) => {
+app.put('/omattiedotid/:id', (req, res) => {
     let id = req.params.id;
     let etunimi = req.body.etunimi;
     let sukunimi = req.body.sukunimi;
@@ -358,7 +359,7 @@ app.put('/omattiedot/', (req, res) => {
         if (error) {
             console.log("Virhe", error);
             res.statusCode = 400;
-            
+
         }
         else {
             console.log("R:", result);
@@ -370,9 +371,7 @@ app.put('/omattiedot/', (req, res) => {
         }
     })
 
-})
-
-
+})  
 
 app.listen(port, () => {
     console.log('Server started on port 3004')
