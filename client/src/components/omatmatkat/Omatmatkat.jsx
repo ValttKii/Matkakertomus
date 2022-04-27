@@ -416,9 +416,9 @@ const KohdeForm = (props) => {
       )}
       <Grid item>
         <TextField
-          label="ID (automaattinen)"
+          label="ID"
           id="filled-size-normal"
-          disabled="true"
+          
           defaultValue=""
           variant="filled"
           value={idmatkakohde}
