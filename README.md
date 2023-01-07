@@ -11,7 +11,7 @@ npm install classnames
 npm install --save react-collapse
 and npm run start
 
-#Description
+# Description
 Unfortunately this project is at least not yet finished.
 
 Shortly my main responsibility was that "Matkakohde" page and features for that were show items, add items  , delete items and modify items.
