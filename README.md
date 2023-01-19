@@ -1,6 +1,8 @@
 # Introduction 
 Ohjelmistotuotanto 2 projekti
 
+node.js, react.js, SQL
+ 
 
 # Getting Started
 1. cd server, npm install, npm install express, npm install mysql and npm run dev
